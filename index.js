@@ -4,6 +4,9 @@ const mongoose = require("mongoose");
 const app = express();
 const productRouter = require("./routes/products");
 const authRouter = require("./routes/auth");
+const userRouter = require("./routes/user")
+const cartRouter = require("./routes/cart")
+const orderRouter = require("./routes/order")
 const port = 3001;
 
 dotenv.config();
@@ -17,6 +20,9 @@ app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
 app.use("/api/products", productRouter);
 app.use('/api/', authRouter)
+app.use('/api/users', userRouter)
+app.use('/api/orders', orderRouter)
+app.use('/api/cart', cartRouter)
 
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', 'http://localhost:3001');
