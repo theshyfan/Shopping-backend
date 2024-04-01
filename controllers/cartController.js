@@ -3,8 +3,8 @@ const Cart = require('../models/Cart');
 
 module.exports = {
     addToCart: async (req, res) => {
-        const {userId, cartItem, quantity} = req.body;
-
+        const userId = req.user.id;
+        const {cartItem, quantity} = req.body;
         try{
             const cart = await Cart.findOne({userId})
 
@@ -14,7 +14,7 @@ module.exports = {
                 );
 
                 if (existingProduct){
-                    existingProduct.quantity += 1
+                    existingProduct.quantity += quantity
                 }else{
                     cart.products.push({cartItem, quantity})
                 }
@@ -38,7 +38,7 @@ module.exports = {
     },
 
     getCart: async (req, res) => {
-        const userId = req.params.id;
+        const userId = req.user.id;
 
         try{
             const cart = await Cart.find({userId})
