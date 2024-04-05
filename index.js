@@ -33,6 +33,6 @@ app.use('/api/cart', cartRouter)
 //   next();
 // });
 
-app.listen(process.env.PORT || port, () =>
+app.listen(process.env.PORT || port, "0.0.0.0",() =>
   console.log(`Example app listening on port ${process.env.PORT}!`)
 );
